@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cindara Homebase</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="app">
+        <div id="homebase">
+            <h1>Cindara Homebase</h1>
+            <div id="modeToggle">
+                <button class="toggle-btn active" data-mode="vector">Vector</button>
+                <button class="toggle-btn" data-mode="paint" disabled>Paint</button>
+                <button class="toggle-btn" data-mode="animate" disabled>Animate</button>
+            </div>
+            <div id="flameControls">
+                <button class="flame-btn" id="speedToggle">Speed: Normal</button>
+                <button class="flame-btn" id="themeToggle">Theme: Primary</button>
+            </div>
+            <div id="toolButtons">
+                <button class="tool-btn" data-tool="vectorizer">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M3 3h18v18H3zM7 7h10v10H7z"/></svg>
+                    Vectorizer
+                </button>
+                <button class="tool-btn" disabled>
+                    <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>
+                    Paint (Coming Soon)
+                </button>
+                <button class="tool-btn" disabled>
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M12 2l-10 10h20z"/></svg>
+                    Animate (Coming Soon)
+                </button>
+            </div>
+            <div id="logoBurner">
+                <h3>Logo Burner</h3>
+                <div id="urlInputs">
+                    <input type="text" class="url-input" id="logoUrlInput" placeholder="Paste image URL">
+                    <button class="export-btn" id="logoLoadBtn">Load</button>
+                    <span class="loader" id="logoUrlLoader"></span>
+                </div>
+                <div id="logoDropZone">Drag & Drop Logo or Paste URL</div>
+                <canvas id="logoCanvas"></canvas>
+                <div id="logoExport">
+                    <button class="export-btn" data-format="png">Export PNG</button>
+                    <button class="export-btn" data-format="svg">Export SVG</button>
+                    <button class="export-btn" data-format="jpeg">Export JPEG</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="toolContainer">
+            <button class="back-btn" id="backToHome">
+                <svg class="icon" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+                Return to Homebase
+            </button>
+            <h2>Cindara Vectorizer</h2>
+            <div id="urlInputs">
+                <input type="text" class="url-input" id="vectorizerUrlInput" placeholder="Paste image URL">
+                <button class="export-btn" id="vectorizerLoadBtn">Load</button>
+                <span class="loader" id="vectorizerUrlLoader"></span>
+            </div>
+            <div id="vectorizerDropZone">Drag & Drop Image or Paste URL</div>
+            <div class="vectorizer-layout">
+                <div>
+                    <h3>Raster Input</h3>
+                    <canvas id="vectorizerCanvas"></canvas>
+                </div>
+                <div>
+                    <h3>Vector Output</h3>
+                    <div id="vectorizerSvgContainer">
+                        <div id="vectorizerSvgOutput"></div>
+                    </div>
+                    <button id="vectorizerResetView">Reset View</button>
+                </div>
+            </div>
+            <div id="vectorizerControls">
+                <button id="vectorizerTraceBtn">Trace Vector</button>
+                <button id="vectorizerUndoBtn" disabled>Undo Trace</button>
+                <button id="vectorizerExportBtn" disabled>Export SVG</button>
+                <h3>Layers</h3>
+                <div id="vectorizerLayerList"></div>
+            </div>
+        </div>
+    </div>
+    <script src="js/cindara.js" defer></script>
+</body>
+</html>
