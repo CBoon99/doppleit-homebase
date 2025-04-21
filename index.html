@@ -4,86 +4,322 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cindara Homebase</title>
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --current-color: #ff8000;
+        }
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(180deg, #1a1a1a 0%, #2a2a40 100%);
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        #app {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        #header {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+        #header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0;
+            text-shadow: 0 0 8px #ffbf00aa;
+        }
+        #status {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-top: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        #status::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #00ff00;
+            border-radius: 50%;
+            margin-right: 6px;
+        }
+        #main {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        #toolPanel {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .tool-card {
+            width: 300px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.25s ease-in-out;
+            cursor: pointer;
+        }
+        .tool-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        .tool-card.active {
+            border: 2px solid #ffbf00;
+            animation: pulse 2s infinite;
+        }
+        .tool-card.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 8px #ffbf00aa; }
+            50% { box-shadow: 0 0 16px #ffbf00aa; }
+            100% { box-shadow: 0 0 8px #ffbf00aa; }
+        }
+        .tool-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0 0 10px;
+        }
+        .tool-card p {
+            font-size: 14px;
+            color: #cccccc;
+            margin: 0 0 10px;
+        }
+        .tool-card svg {
+            width: 40px;
+            height: 40px;
+            fill: #ffffff;
+            margin-bottom: 10px;
+        }
+        .tool-card button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.25s ease-in-out;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
+        }
+        .tool-card button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        .tool-card button:active {
+            background: rgba(255, 255, 255, 0.4);
+            transition: background 0.1s;
+        }
+        .tool-card.disabled button {
+            background: rgba(255, 255, 255, 0.05);
+            color: #666;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        #quickActions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .action-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.25s ease-in-out;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .action-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        .action-btn:active {
+            background: rgba(255, 255, 255, 0.4);
+            transition: background 0.1s;
+        }
+        .action-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: #fff;
+            transition: fill 0.25s ease-in-out;
+        }
+        .action-btn:hover svg {
+            fill: #ffbf00;
+        }
+        .tooltip {
+            position: relative;
+        }
+        .tooltip::after {
+            content: attr(title);
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease-in-out;
+            backdrop-filter: blur(10px);
+        }
+        .tooltip:hover::after {
+            opacity: 1;
+        }
+        #footer {
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.08);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            font-size: 12px;
+            color: #cccccc;
+        }
+        #footer a {
+            color: #ffbf00;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        #footer a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            #header, #main {
+                padding: 12px;
+            }
+            #header h1 {
+                font-size: 24px;
+            }
+            .tool-card {
+                width: 100%;
+                max-width: 300px;
+            }
+            .action-btn {
+                padding: 8px 14px;
+                font-size: 13px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div id="app">
-        <div id="homebase">
+        <div id="header">
             <h1>Cindara Homebase</h1>
-            <div id="modeToggle">
-                <button class="toggle-btn active" data-mode="vector">Vector</button>
-                <button class="toggle-btn" data-mode="paint" disabled>Paint</button>
-                <button class="toggle-btn" data-mode="animate" disabled>Animate</button>
-            </div>
-            <div id="flameControls">
-                <button class="flame-btn" id="speedToggle">Speed: Normal</button>
-                <button class="flame-btn" id="themeToggle">Theme: Primary</button>
-            </div>
-            <div id="toolButtons">
-                <button class="tool-btn" data-tool="vectorizer">
-                    <svg class="icon" viewBox="0 0 24 24"><path d="M3 3h18v18H3zM7 7h10v10H7z"/></svg>
-                    Vectorizer
-                </button>
-                <button class="tool-btn" disabled>
-                    <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>
-                    Paint (Coming Soon)
-                </button>
-                <button class="tool-btn" disabled>
-                    <svg class="icon" viewBox="0 0 24 24"><path d="M12 2l-10 10h20z"/></svg>
-                    Animate (Coming Soon)
-                </button>
-            </div>
-            <div id="logoBurner">
-                <h3>Logo Burner</h3>
-                <div id="urlInputs">
-                    <input type="text" class="url-input" id="logoUrlInput" placeholder="Paste image URL">
-                    <button class="export-btn" id="logoLoadBtn">Load</button>
-                    <span class="loader" id="logoUrlLoader"></span>
+            <div id="status">Vector Online, Paint & Animate Offline</div>
+        </div>
+        <div id="main">
+            <div id="toolPanel">
+                <div class="tool-card active" data-tool="vectorizer" aria-label="Launch Vectorizer Tool">
+                    <svg viewBox="0 0 24 24"><path d="M3 3h18v18H3zM7 7h10v10H7z"/></svg>
+                    <h3>Vectorizer</h3>
+                    <p>Create precise vector graphics with advanced tracing and editing tools.</p>
+                    <button onclick="launchTool('vectorizer')" title="Launch Vectorizer Tool">Launch</button>
                 </div>
-                <div id="logoDropZone">Drag & Drop Logo or Paste URL</div>
-                <canvas id="logoCanvas"></canvas>
-                <div id="logoExport">
-                    <button class="export-btn" data-format="png">Export PNG</button>
-                    <button class="export-btn" data-format="svg">Export SVG</button>
-                    <button class="export-btn" data-format="jpeg">Export JPEG</button>
+                <div class="tool-card disabled" data-tool="paint" aria-label="Paint Tool (Coming Soon)">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>
+                    <h3>Paint</h3>
+                    <p>Unleash your creativity with freeform drawing and painting. (Coming Soon)</p>
+                    <button disabled title="Paint Tool Coming Soon">Coming Soon</button>
                 </div>
+                <div class="tool-card disabled" data-tool="animate" aria-label="Animate Tool (Coming Soon)">
+                    <svg viewBox="0 0 24 24"><path d="M12 2l-10 10h20z"/></svg>
+                    <h3>Animate</h3>
+                    <p>Bring your designs to life with powerful animation tools. (Coming Soon)</p>
+                    <button disabled title="Animate Tool Coming Soon">Coming Soon</button>
+                </div>
+            </div>
+            <div id="quickActions">
+                <button class="action-btn tooltip" title="Upload Image" aria-label="Upload Image">
+                    <svg viewBox="0 0 24 24"><path d="M3 15v4h18v-4M12 3v12m-6-6l6-6 6 6"/></svg>
+                    Upload Image
+                </button>
+                <button class="action-btn tooltip" title="Export Recent Project" aria-label="Export Recent Project">
+                    <svg viewBox="0 0 24 24"><path d="M19 3H5v18l7-3 7 3V3z"/></svg>
+                    Export Recent
+                </button>
+                <button class="action-btn tooltip" title="View Project Gallery" aria-label="View Project Gallery">
+                    <svg viewBox="0 0 24 24"><path d="M4 4h16v12H4zM4 16h16v4H4z"/></svg>
+                    View Gallery
+                </button>
             </div>
         </div>
-
-        <div id="toolContainer">
-            <button class="back-btn" id="backToHome">
-                <svg class="icon" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
-                Return to Homebase
-            </button>
-            <h2>Cindara Vectorizer</h2>
-            <div id="urlInputs">
-                <input type="text" class="url-input" id="vectorizerUrlInput" placeholder="Paste image URL">
-                <button class="export-btn" id="vectorizerLoadBtn">Load</button>
-                <span class="loader" id="vectorizerUrlLoader"></span>
-            </div>
-            <div id="vectorizerDropZone">Drag & Drop Image or Paste URL</div>
-            <div class="vectorizer-layout">
-                <div>
-                    <h3>Raster Input</h3>
-                    <canvas id="vectorizerCanvas"></canvas>
-                </div>
-                <div>
-                    <h3>Vector Output</h3>
-                    <div id="vectorizerSvgContainer">
-                        <div id="vectorizerSvgOutput"></div>
-                    </div>
-                    <button id="vectorizerResetView">Reset View</button>
-                </div>
-            </div>
-            <div id="vectorizerControls">
-                <button id="vectorizerTraceBtn">Trace Vector</button>
-                <button id="vectorizerUndoBtn" disabled>Undo Trace</button>
-                <button id="vectorizerExportBtn" disabled>Export SVG</button>
-                <h3>Layers</h3>
-                <div id="vectorizerLayerList"></div>
-            </div>
+        <div id="footer">
+            <a href="#" aria-label="About Cindara">About</a> |
+            <a href="#" aria-label="Support">Support</a> |
+            Cindara Suite v1.0
         </div>
     </div>
-    <script src="js/cindara.js" defer></script>
+    <script>
+        function launchTool(tool) {
+            if (tool === 'vectorizer') {
+                window.location.href = 'https://680572a0ffe463cafa7f6a6e--cindaravector.netlify.app/';
+            } else {
+                alert(`${tool.charAt(0).toUpperCase() + tool.slice(1)} is coming soon!`);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const actionButtons = document.querySelectorAll('.action-btn');
+            actionButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    alert(`${btn.textContent.trim()} functionality coming soon!`);
+                });
+            });
+
+            // Keyboard navigation
+            document.querySelectorAll('.tool-card, .action-btn').forEach(el => {
+                el.setAttribute('tabindex', '0');
+                el.addEventListener('keydown', e => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        el.querySelector('button')?.click() || el.click();
+                    }
+                });
+            });
+        });
+
+        // Preserve challenge script
+        (function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'933c41618b26135b',t:'MTc0NTIzMTk0My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();
+    </script>
 </body>
 </html>

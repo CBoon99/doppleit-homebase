@@ -1,114 +1,54 @@
-CINDARA HOMEBASE – README (TXT VERSION)
+# CINDARA HOMEBASE – README v1.0
 
-Overview: Cindara Homebase is a unified creative interface designed to empower independent makers with powerful browser-based tools for image processing, vectorization, logo styling, and eventual animation—without relying on big tech or bloated software. It’s ultra-light, modular, and built entirely in native HTML, CSS, and JavaScript.
+## Overview
+Cindara Homebase is the command center of the Cindara creative suite. It provides a clean, confident portal into tools like Vectorizer, Paint, and Animate—offering users a polished launch experience with suite-level UI consistency and accessibility. Built in pure HTML, CSS, and JavaScript, it’s optimized for speed, responsiveness, and standalone deployment.
 
-Features:
+## Features
+- **Tool Cards Interface**
+  - Launch directly into Cindara Vectorizer
+  - Paint and Animate cards are visually included, marked as "Coming Soon"
+  - Responsive layout with glass-effect panels and flame-glow transitions
 
-Instant Preview on File Drop
+- **Suite Status Display**
+  - Status pill below the title shows current tool availability
+  - Green dot indicates active tools, orange for offline/coming soon
 
-Vectorizer auto-traces immediately after image upload or drop.
+- **Quick Actions Panel**
+  - Buttons for: Upload Image, Export Recent, View Gallery
+  - Hover effects, tooltips, and glowing interactions
+  - Click events currently trigger placeholders (wired in future phase)
 
-Logo Burner shows stylized preview on load.
+- **Visual & UX Polish**
+  - Inter font, flame-orange highlights (#ff8000, #ffbf00)
+  - Responsive from 320px to full-width desktop
+  - Hover glow, card pulse, smooth scaling and fade-in
+  - ARIA labels and keyboard support included for accessibility
 
-No clicks needed to preview—just drop and go.
+- **All-in-One Delivery**
+  - Single `index.html` file
+  - No external CSS or JS dependencies
+  - Netlify ready
 
-Return to Homebase Button
+## How to Use
+1. Open `index.html` in your browser or deploy to a Netlify project
+2. Click **Vectorizer** to launch the tool
+3. Hover over other cards or quick actions to preview behaviors
+4. "Coming Soon" tools are disabled but visually included
 
-Top of tool panel has a dark button with left arrow.
+## Known Limitations (v1.0)
+- Paint and Animate tools are not active
+- Upload, Export, and Gallery buttons trigger placeholder alerts
+- No live theme switching or flame speed modes in this version
 
-Returns you to the main menu instantly.
+## Next Steps
+- Wire Paint and Animate once tools are finalized
+- Connect Quick Actions to backend or tool memory
+- Optional: Add dark mode toggle, suite-wide notifications, or profile/auth panel
 
-Fits the Flame aesthetic with smooth hover animation.
+## Deployment
+- This file can be deployed directly to Netlify or hosted on any static web server
+- Suggested Netlify site: `cindarahomebase.netlify.app`
 
-Flame Speed Modes
-
-Modes: Normal, Fast, Glow.
-
-Fast: Skips pixels and lowers edge threshold for speed.
-
-Glow: Adds a shadow effect to vector and logo output.
-
-Toggle via the “Speed” button.
-
-Live Flame Theme Picker
-
-Themes: Primary (orange), Aqua (blue), Neon (magenta).
-
-Changes buttons, drop zones, headers, and more.
-
-Toggle via the “Theme” button.
-
-Tiny File Size Optimizer
-
-Removes empty paths.
-
-Deduplicates SVG points.
-
-Keeps file lean and optimized.
-
-URL Upload Support
-
-Paste image URLs into input fields in both tools.
-
-Load button fetches and previews the image.
-
-Built-in loading spinner (theme colored).
-
-How to Use:
-
-Open index.html in your browser.
-
-On the Homebase screen:
-
-Choose "Vectorizer" or use "Logo Burner".
-
-Paint and Animate are disabled (coming soon).
-
-Use Flame Controls to switch speed or theme.
-
-In tools:
-
-Drop images or paste URLs.
-
-See previews and start editing.
-
-Adjust layer styles, reorder, export.
-
-Return to Homebase any time with the back arrow.
-
-Testing Tips:
-
-Use small images for fast vector tracing (e.g. logos).
-
-Switch to Fast mode to test speed/quality balance.
-
-Try Glow mode to see vector glow effects.
-
-Paste public image URLs to test fetch and render.
-
-Export your vectors to SVG and compare file size.
-
-Use the console to track logs (e.g. tracing, theme changes).
-
-Logs for Debugging:
-
-[LuxLabs.Core] Homebase initialized.
-
-[LuxLabs.Vectorizer.Image] Loaded and traced.
-
-[LuxLabs.Flame] Theme cycled to index X.
-
-[LuxLabs.Flame] Speed mode: fast/glow/normal.
-
-[LuxLabs.Vectorizer.Visual] SVG drawn.
-
-Potential Extensions:
-
-More animated themes.
-
-Adjustable Fast Mode settings.
-
-Full undo/redo history engine.
-
-CORS proxy for broader URL image support.
+---
+Cindara Suit 2025
 
