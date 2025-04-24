@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cindara Homebase</title>
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Doppleit Homebase</title>
+<style>
         :root {
             --current-color: #ff8000;
         }
@@ -239,60 +240,63 @@
                 font-size: 13px;
             }
         }
-    </style>
+    
+.tool-card:focus {
+    outline: 2px solid var(--glow-color);
+    outline-offset: 2px;
+    box-shadow: 0 0 12px var(--shadow-glow);
+    transition: box-shadow 0.25s ease-in-out;
+}
+</style>
 </head>
 <body>
-    <div id="app">
-        <div id="header">
-            <h1>Cindara Homebase</h1>
-            <div id="status">Vector Online, Paint & Animate Offline</div>
-        </div>
-        <div id="main">
-            <div id="toolPanel">
-                <div class="tool-card active" data-tool="vectorizer" aria-label="Launch Vectorizer Tool">
-                    <svg viewBox="0 0 24 24"><path d="M3 3h18v18H3zM7 7h10v10H7z"/></svg>
-                    <h3>Vectorizer</h3>
-                    <p>Create precise vector graphics with advanced tracing and editing tools.</p>
-                    <button onclick="launchTool('vectorizer')" title="Launch Vectorizer Tool">Launch</button>
-                </div>
-                <div class="tool-card disabled" data-tool="paint" aria-label="Paint Tool (Coming Soon)">
-                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>
-                    <h3>Paint</h3>
-                    <p>Unleash your creativity with freeform drawing and painting. (Coming Soon)</p>
-                    <button disabled title="Paint Tool Coming Soon">Coming Soon</button>
-                </div>
-                <div class="tool-card disabled" data-tool="animate" aria-label="Animate Tool (Coming Soon)">
-                    <svg viewBox="0 0 24 24"><path d="M12 2l-10 10h20z"/></svg>
-                    <h3>Animate</h3>
-                    <p>Bring your designs to life with powerful animation tools. (Coming Soon)</p>
-                    <button disabled title="Animate Tool Coming Soon">Coming Soon</button>
-                </div>
-            </div>
-            <div id="quickActions">
-                <button class="action-btn tooltip" title="Upload Image" aria-label="Upload Image">
-                    <svg viewBox="0 0 24 24"><path d="M3 15v4h18v-4M12 3v12m-6-6l6-6 6 6"/></svg>
+<div id="app">
+<div id="header">
+<h1>Doppleit Homebase</h1>
+<div id="status">Vector Online, Paint &amp; Animate Offline</div>
+</div>
+<div id="main">
+<div id="toolPanel">
+<div aria-label="Launch Vectorizer Tool" class="tool-card active" data-tool="vectorizer">
+<svg viewbox="0 0 24 24"><title>Vector Icon</title><path d="M3 3h18v18H3zM7 7h10v10H7z"></path></svg>
+<h3>Vectorizer</h3>
+<p>Create precise vector graphics with advanced tracing and editing tools.</p>
+<button onclick="launchTool('vectorizer')" title="Launch Vectorizer Tool">Launch</button>
+</div>
+<div aria-label="Paint Tool (Coming Soon)" class="tool-card disabled" data-tool="paint">
+<svg viewbox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle></svg>
+<h3>Paint</h3>
+<p>Unleash your creativity with freeform drawing and painting. (Coming Soon)</p>
+<button disabled="" title="Paint Tool Coming Soon">Coming Soon</button>
+</div>
+<div aria-label="Animate Tool (Coming Soon)" class="tool-card disabled" data-tool="animate">
+<svg viewbox="0 0 24 24"><path d="M12 2l-10 10h20z"></path></svg>
+<h3>Animate</h3>
+<p>Bring your designs to life with powerful animation tools. (Coming Soon)</p>
+<button disabled="" title="Animate Tool Coming Soon">Coming Soon</button>
+</div>
+</div>
+<div id="quickActions">
+<button aria-label="Upload Image" class="action-btn tooltip" title="Upload Image">
+<svg viewbox="0 0 24 24"><path d="M3 15v4h18v-4M12 3v12m-6-6l6-6 6 6"></path></svg>
                     Upload Image
                 </button>
-                <button class="action-btn tooltip" title="Export Recent Project" aria-label="Export Recent Project">
-                    <svg viewBox="0 0 24 24"><path d="M19 3H5v18l7-3 7 3V3z"/></svg>
+<button aria-label="Export Recent Project" class="action-btn tooltip" title="Export Recent Project">
+<svg viewbox="0 0 24 24"><path d="M19 3H5v18l7-3 7 3V3z"></path></svg>
                     Export Recent
                 </button>
-                <button class="action-btn tooltip" title="View Project Gallery" aria-label="View Project Gallery">
-                    <svg viewBox="0 0 24 24"><path d="M4 4h16v12H4zM4 16h16v4H4z"/></svg>
+<button aria-label="View Project Gallery" class="action-btn tooltip" title="View Project Gallery">
+<svg viewbox="0 0 24 24"><path d="M4 4h16v12H4zM4 16h16v4H4z"></path></svg>
                     View Gallery
                 </button>
-            </div>
-        </div>
-        <div id="footer">
-            <a href="#" aria-label="About Cindara">About</a> |
-            <a href="#" aria-label="Support">Support</a> |
-            Cindara Suite v1.0
-        </div>
-    </div>
-    <script>
+</div>
+</div>
+<div id="footer">Doppleit Suite v1.0</div>
+</div>
+<script>
         function launchTool(tool) {
             if (tool === 'vectorizer') {
-                window.location.href = 'https://680572a0ffe463cafa7f6a6e--cindaravector.netlify.app/';
+                window.location.href = '/vector';
             } else {
                 alert(`${tool.charAt(0).toUpperCase() + tool.slice(1)} is coming soon!`);
             }
