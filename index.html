@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Doppleit Homebase</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 4c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 4c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 4c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z' fill='%23e37800'/%3E%3C/svg%3E">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #e37800;
+      --glow-color: #ffb340;
+      --gradient: linear-gradient(90deg, #e37800, #ffbf40);
+      --shadow-glow: 0 0 12px rgba(255, 179, 64, 0.5);
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(180deg, #1a1a1a 0%, #2a2a40 100%);
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+    @keyframes glitch {
+      0% { opacity: 1; transform: translateX(0); filter: hue-rotate(0deg); }
+      10% { opacity: 0.7; transform: translateX(-2px); filter: hue-rotate(20deg); }
+      20% { opacity: 1; transform: translateX(2px); filter: hue-rotate(-20deg); }
+      30% { opacity: 0.6; transform: translateX(-1px); filter: hue-rotate(10deg); }
+      40% { opacity: 1; transform: translateX(1px); }
+      60% { opacity: 0.8; transform: translateX(-1px); filter: hue-rotate(-10deg); }
+      80% { opacity: 1; transform: translateX(0); filter: hue-rotate(0deg); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes welcomePulse {
+      0% { box-shadow: 0 0 8px var(--shadow-glow); }
+      50% { box-shadow: 0 0 16px var(--shadow-glow); }
+      100% { box-shadow: 0 0 8px var(--shadow-glow); }
+    }
+    #app {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    #header {
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      text-align: center;
+    }
+    #header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      text-shadow: var(--shadow-glow);
+    }
+    .tagline-main {
+      font-size: 18px;
+      font-weight: 600;
+      color: #ffffff;
+      text-shadow: 0 0 4px var(--glow-color);
+      animation: glitch 0.8s ease-in-out;
+      max-width: 600px;
+      margin: 8px auto 4px;
+    }
+    .tagline-sub {
+      font-size: 14px;
+      color: #cccccc;
+      text-shadow: 0 0 2px rgba(255, 179, 64, 0.3);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    #status {
+      display: inline-block;
+      margin-top: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 6px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+    }
+    #status::before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: #00ff00;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+    #main {
+      flex: 1;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .tool-card {
+      width: 300px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      backdrop-filter: blur(10px);
+      text-align: center;
+      cursor: pointer;
+      animation: welcomePulse 1.5s ease-in-out;
+    }
+    .tool-card:focus {
+      outline: 2px solid var(--glow-color);
+      outline-offset: 2px;
+      box-shadow: 0 0 16px var(--shadow-glow);
+    }
+    .tool-card svg {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 10px;
+      fill: #fff;
+    }
+    .tool-card h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    .tool-card p {
+      font-size: 14px;
+      color: #ccc;
+      margin-bottom: 10px;
+    }
+    .tool-card button {
+      padding: 10px 20px;
+      border-radius: 16px;
+      border: none;
+      background: var(--gradient);
+      color: #fff;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      width: 100%;
+    }
+    .tool-card button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px var(--shadow-glow);
+    }
+    .tool-card button:active {
+      transform: scale(0.98);
+      transition: transform 0.1s ease-in-out;
+    }
+    #footer {
+      padding: 10px;
+      text-align: center;
+      font-size: 12px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #cccccc;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+    }
+    #footer a {
+      color: var(--glow-color);
+      text-decoration: none;
+      margin: 0 10px;
+    }
+    @media (max-width: 768px) {
+      #header h1 { font-size: 24px; }
+      .tagline-main { font-size: 16px; }
+      .tagline-sub { font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div id="header">
+      <h1>Doppleit Homebase</h1>
+      <p class="tagline-main">Dopple it. Painting it.</p>
+      <p class="tagline-sub">Software that reflects your creativity.</p>
+      <div id="status">Vector Online</div>
+    </div>
+    <div id="main">
+      <div class="tool-card" tabindex="0" aria-label="Launch Doppleit Vector Tool">
+        <svg viewBox="0 0 24 24"><path d="M3 3h18v18H3zM7 7h10v10H7z"/></svg>
+        <h3>Doppleit Vector</h3>
+        <p>Create precise vector graphics with advanced tracing and editing tools.</p>
+        <button onclick="launchTool('vector')" title="Launch Doppleit Vector Tool">Launch</button>
+      </div>
+    </div>
+    <div id="footer">
+      <a href="#" aria-label="About Doppleit">About</a> | 
+      <a href="#" aria-label="Support">Support</a> | 
+      Doppleit Suite v1.0 © 2025
+    </div>
+  </div>
+  <script>
+    function launchTool(tool) {
+      if (tool === 'vector') {
+        window.location.href = '/vector';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const card = document.querySelector('.tool-card');
+      card.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          card.querySelector('button').click();
+        }
+      });
+    });
+  </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9356af219e9ad1b5',t:'MTc0NTUwOTA2OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+</body>
+</html>
