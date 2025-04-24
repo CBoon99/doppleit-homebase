@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Doppleit Homebase</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 4c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 4c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 4c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z' fill='%23e37800'/%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="Assets/doppleit_logo_placeholder.svg">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -54,26 +54,11 @@
       backdrop-filter: blur(10px);
       text-align: center;
     }
-    #header h1 {
-      font-size: 28px;
-      font-weight: 700;
-      text-shadow: var(--shadow-glow);
-    }
-    .tagline-main {
-      font-size: 18px;
-      font-weight: 600;
-      color: #ffffff;
-      text-shadow: 0 0 4px var(--glow-color);
+    #header img.logo-glitch {
+      max-width: 300px;
+      width: 100%;
       animation: glitch 0.8s ease-in-out;
-      max-width: 600px;
-      margin: 8px auto 4px;
-    }
-    .tagline-sub {
-      font-size: 14px;
-      color: #cccccc;
-      text-shadow: 0 0 2px rgba(255, 179, 64, 0.3);
-      max-width: 600px;
-      margin: 0 auto;
+      box-shadow: 0 0 8px var(--shadow-glow);
     }
     #status {
       display: inline-block;
@@ -95,9 +80,12 @@
     #main {
       flex: 1;
       padding: 20px;
+      min-height: 0;
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
     }
     .tool-card {
       width: 300px;
@@ -162,19 +150,12 @@
       text-decoration: none;
       margin: 0 10px;
     }
-    @media (max-width: 768px) {
-      #header h1 { font-size: 24px; }
-      .tagline-main { font-size: 16px; }
-      .tagline-sub { font-size: 13px; }
-    }
   </style>
 </head>
 <body>
   <div id="app">
     <div id="header">
-      <h1>Doppleit Homebase</h1>
-      <p class="tagline-main">Dopple it. Painting it.</p>
-      <p class="tagline-sub">Software that reflects your creativity.</p>
+      <img src="Assets/doppleit_logo_placeholder.svg" alt="Doppleit - Software that reflects your creativity" class="logo-glitch">
       <div id="status">Vector Online</div>
     </div>
     <div id="main">
@@ -208,6 +189,5 @@
       });
     });
   </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9356af219e9ad1b5',t:'MTc0NTUwOTA2OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>
